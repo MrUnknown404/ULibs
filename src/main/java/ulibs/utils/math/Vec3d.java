@@ -101,6 +101,10 @@ public class Vec3d implements ICopyable<Vec3d> {
 		return z;
 	}
 	
+	public double difference(Vec3d vec) {
+		return Math.abs(x - vec.x) + Math.abs(y - vec.y) + Math.abs(z - vec.z);
+	}
+	
 	@Override
 	public Vec3d copy() {
 		return new Vec3d(this);

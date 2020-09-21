@@ -81,6 +81,10 @@ public class Vec2f implements ICopyable<Vec2f> {
 		return x * y;
 	}
 	
+	public float difference(Vec2f vec) {
+		return Math.abs(x - vec.x) + Math.abs(y - vec.y);
+	}
+	
 	@Override
 	public Vec2f copy() {
 		return new Vec2f(this);
