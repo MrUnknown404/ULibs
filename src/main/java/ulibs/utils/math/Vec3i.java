@@ -3,7 +3,6 @@ package main.java.ulibs.utils.math;
 import main.java.ulibs.utils.ICopyable;
 
 public class Vec3i implements ICopyable<Vec3i> {
-	public static final Vec3i ZERO = new Vec3i();
 	protected int x, y, z;
 	
 	public Vec3i() {
@@ -103,6 +102,10 @@ public class Vec3i implements ICopyable<Vec3i> {
 	
 	public int difference(Vec3i vec) {
 		return Math.abs(x - vec.x) + Math.abs(y - vec.y) + Math.abs(z - vec.z);
+	}
+	
+	public boolean isZero() {
+		return (x == 0 && y == 0 && z == 0) ? true : false;
 	}
 	
 	@Override

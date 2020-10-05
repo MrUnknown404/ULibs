@@ -3,7 +3,6 @@ package main.java.ulibs.utils.math;
 import main.java.ulibs.utils.ICopyable;
 
 public class Vec2f implements ICopyable<Vec2f> {
-	public static final Vec2f ZERO = new Vec2f();
 	protected float x, y;
 	
 	public Vec2f() {
@@ -83,6 +82,10 @@ public class Vec2f implements ICopyable<Vec2f> {
 	
 	public float difference(Vec2f vec) {
 		return Math.abs(x - vec.x) + Math.abs(y - vec.y);
+	}
+	
+	public boolean isZero() {
+		return (x == 0 && y == 0) ? true : false;
 	}
 	
 	@Override

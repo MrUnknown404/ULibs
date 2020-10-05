@@ -3,7 +3,6 @@ package main.java.ulibs.utils.math;
 import main.java.ulibs.utils.ICopyable;
 
 public class Vec2d implements ICopyable<Vec2d> {
-	public static final Vec2d ZERO = new Vec2d();
 	protected double x, y;
 	
 	public Vec2d() {
@@ -83,6 +82,10 @@ public class Vec2d implements ICopyable<Vec2d> {
 	
 	public double difference(Vec2d vec) {
 		return Math.abs(x - vec.x) + Math.abs(y - vec.y);
+	}
+	
+	public boolean isZero() {
+		return (x == 0 && y == 0) ? true : false;
 	}
 	
 	@Override
