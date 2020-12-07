@@ -7,17 +7,21 @@ import main.java.ulibs.Main;
 
 public final class Console {
 	
-	private static final WarningType[] DISABLED_TYPES = {WarningType.RegisterDebug, WarningType.TextureDebug};
+	public static boolean showThread;
+	private static final WarningType[] DISABLED_TYPES = { WarningType.RegisterDebug, WarningType.TextureDebug };
 	
 	/** Prints date info to the console Example: <p> [12:34:56:789] [Info] [ExampleClass.exampleMethod.69] [Hour/Minute/Second/Millisecond] */
 	public static void getTimeExample() {
-		System.out.println("[" + new SimpleDateFormat("hh:mm:ss:SSS").format(new Date()) + "] [" + WarningType.Info + "] [" + getCallerInfo(Console.class.getName()) + "] [Hour/Minute/Second/Millisecond]");
+		System.out.println(
+				"[" + new SimpleDateFormat("hh:mm:ss:SSS").format(new Date()) + "]" + (showThread ? " [T/" + Thread.currentThread().getName() + "] " : " ") + "[" +
+						WarningType.Info + "] [" + getCallerInfo(Console.class.getName()) + "] [Hour/Minute/Second/Millisecond]");
 	}
 	
 	/** Prints date info plus the given string to the console Example: <p> [12:34:56:789] [Debug] [ExampleClass.exampleMethod.69] : Hello! */
 	public static void print(WarningType type, String string, boolean shouldThrow) {
 		if (type == null) {
-			System.out.println("[" + new SimpleDateFormat("hh:mm:ss:SSS").format(new Date()) + "] [Debug] [" + getCallerInfo(Console.class.getName()) + "] : " + string);
+			System.out.println(
+					"[" + new SimpleDateFormat("hh:mm:ss:SSS").format(new Date()) + "] [Debug] [" + getCallerInfo(Console.class.getName()) + "] : " + string);
 			return;
 		}
 		
@@ -30,9 +34,13 @@ public final class Console {
 		}
 		
 		if (type == WarningType.Error || type == WarningType.FatalError) {
-			System.err.println("[" + new SimpleDateFormat("hh:mm:ss:SSS").format(new Date()) + "] [" + type.toString() + "] [" + getCallerInfo(Console.class.getName()) + "] : " + string);
+			System.err.println(
+					"[" + new SimpleDateFormat("hh:mm:ss:SSS").format(new Date()) + "]" + (showThread ? " [T/" + Thread.currentThread().getName() + "] " : " ") +
+							"[" + type.toString() + "] [" + getCallerInfo(Console.class.getName()) + "] : " + string);
 		} else {
-			System.out.println("[" + new SimpleDateFormat("hh:mm:ss:SSS").format(new Date()) + "] [" + type.toString() + "] [" + getCallerInfo(Console.class.getName()) + "] : " + string);
+			System.out.println(
+					"[" + new SimpleDateFormat("hh:mm:ss:SSS").format(new Date()) + "]" + (showThread ? " [T/" + Thread.currentThread().getName() + "] " : " ") +
+							"[" + type.toString() + "] [" + getCallerInfo(Console.class.getName()) + "] : " + string);
 		}
 		
 		if (shouldThrow) {
@@ -60,7 +68,8 @@ public final class Console {
 		for (int i = 1; i < stElements.length; i++) {
 			StackTraceElement ste = stElements[i];
 			if (!ste.getClassName().equals(className) && ste.getClassName().indexOf("java.lang.Thread") != 0) {
-				return (ste.getClassName().replaceAll(ste.getClassName().substring(0, ste.getClassName().lastIndexOf('.') + 1), "") + "." + ste.getMethodName() + "." + ste.getLineNumber()).replace("$", ".").replace("<", "").replace(">", "");
+				return (ste.getClassName().replaceAll(ste.getClassName().substring(0, ste.getClassName().lastIndexOf('.') + 1), "") + "." + ste.getMethodName() +
+						"." + ste.getLineNumber()).replace("$", ".").replace("<", "").replace(">", "");
 			}
 		}
 		
@@ -68,6 +77,7 @@ public final class Console {
 	}
 	
 	public enum WarningType {
+		Debug,
 		Info,
 		Warning,
 		Error,

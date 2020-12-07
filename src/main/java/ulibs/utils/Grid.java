@@ -14,7 +14,7 @@ public class Grid<T> {
 		this.width = width;
 		this.height = height;
 		
-		for (int i = 0; i < width * height ; i++) {
+		for (int i = 0; i < width * height; i++) {
 			grid.add(t);
 		}
 	}
