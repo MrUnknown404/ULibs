@@ -64,6 +64,50 @@ public class Vec3d implements ICopyable<Vec3d> {
 		return this;
 	}
 	
+	public Vec3d multiply(double x, double y, double z) {
+		this.x *= x;
+		this.y *= y;
+		this.z *= z;
+		return this;
+	}
+	
+	public Vec3d multiplyX(double x) {
+		this.x *= x;
+		return this;
+	}
+	
+	public Vec3d multiplyY(double y) {
+		this.y *= y;
+		return this;
+	}
+	
+	public Vec3d multiplyZ(double z) {
+		this.z *= z;
+		return this;
+	}
+	
+	public Vec3d divide(double x, double y, double z) {
+		this.x /= x;
+		this.y /= y;
+		this.z /= z;
+		return this;
+	}
+	
+	public Vec3d divideX(double x) {
+		this.x /= x;
+		return this;
+	}
+	
+	public Vec3d divideY(double y) {
+		this.y /= y;
+		return this;
+	}
+	
+	public Vec3d divideZ(double z) {
+		this.z /= z;
+		return this;
+	}
+	
 	public void set(Vec3f vec) {
 		this.x = vec.x;
 		this.y = vec.y;

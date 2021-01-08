@@ -64,6 +64,50 @@ public class Vec3f implements ICopyable<Vec3f> {
 		return this;
 	}
 	
+	public Vec3f multiply(float x, float y, float z) {
+		this.x *= x;
+		this.y *= y;
+		this.z *= z;
+		return this;
+	}
+	
+	public Vec3f multiplyX(float x) {
+		this.x *= x;
+		return this;
+	}
+	
+	public Vec3f multiplyY(float y) {
+		this.y *= y;
+		return this;
+	}
+	
+	public Vec3f multiplyZ(float z) {
+		this.z *= z;
+		return this;
+	}
+	
+	public Vec3f divide(float x, float y, float z) {
+		this.x /= x;
+		this.y /= y;
+		this.z /= z;
+		return this;
+	}
+	
+	public Vec3f divideX(float x) {
+		this.x /= x;
+		return this;
+	}
+	
+	public Vec3f divideY(float y) {
+		this.y /= y;
+		return this;
+	}
+	
+	public Vec3f divideZ(float z) {
+		this.z /= z;
+		return this;
+	}
+	
 	public void set(Vec3f vec) {
 		this.x = vec.x;
 		this.y = vec.y;

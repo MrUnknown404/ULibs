@@ -50,6 +50,38 @@ public class Vec2d implements ICopyable<Vec2d> {
 		this.y += y;
 	}
 	
+	public Vec2d multiply(double x, double y) {
+		this.x *= x;
+		this.y *= y;
+		return this;
+	}
+	
+	public Vec2d multiplyX(double x) {
+		this.x *= x;
+		return this;
+	}
+	
+	public Vec2d multiplyY(double y) {
+		this.y *= y;
+		return this;
+	}
+	
+	public Vec2d divide(double x, double y) {
+		this.x /= x;
+		this.y /= y;
+		return this;
+	}
+	
+	public Vec2d divideX(double x) {
+		this.x /= x;
+		return this;
+	}
+	
+	public Vec2d divideY(double y) {
+		this.y /= y;
+		return this;
+	}
+	
 	public void set(Vec2d vec) {
 		this.x = vec.x;
 		this.y = vec.y;

@@ -1,8 +1,12 @@
 package main.java.ulibs.utils.math;
 
+import java.util.Random;
+
 import main.java.ulibs.utils.Console;
 
 public class MathH {
+	public static final Random RANDOM = new Random();
+	
 	public static int floor(float value) {
 		int i = (int) value;
 		return value < i ? i - 1 : i;
