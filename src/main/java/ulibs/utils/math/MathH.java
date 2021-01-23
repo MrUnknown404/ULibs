@@ -4,6 +4,7 @@ import java.util.Random;
 
 import main.java.ulibs.utils.Console;
 
+@SuppressWarnings("javadoc") //TODO write the javadocs for all the math
 public class MathH {
 	public static final Random RANDOM = new Random();
 	

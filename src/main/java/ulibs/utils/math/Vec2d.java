@@ -2,6 +2,7 @@ package main.java.ulibs.utils.math;
 
 import main.java.ulibs.utils.ICopyable;
 
+@SuppressWarnings("javadoc")
 public class Vec2d implements ICopyable<Vec2d> {
 	protected double x, y;
 	
@@ -32,22 +33,32 @@ public class Vec2d implements ICopyable<Vec2d> {
 		this(vec.getX(), vec.getY());
 	}
 	
-	public void add(Vec2d vec) {
+	public Vec2d add(Vec2d vec) {
 		this.x += vec.x;
 		this.y += vec.y;
+		return this;
 	}
 	
-	public void add(double x, double y) {
+	public Vec2d add(double x, double y) {
 		this.x += x;
 		this.y += y;
+		return this;
 	}
 	
-	public void addX(double x) {
+	public Vec2d addX(double x) {
 		this.x += x;
+		return this;
 	}
 	
-	public void addY(double y) {
+	public Vec2d addY(double y) {
 		this.y += y;
+		return this;
+	}
+	
+	public Vec2d multiply(Vec2d vec) {
+		this.x *= vec.x;
+		this.y *= vec.y;
+		return this;
 	}
 	
 	public Vec2d multiply(double x, double y) {
@@ -63,6 +74,12 @@ public class Vec2d implements ICopyable<Vec2d> {
 	
 	public Vec2d multiplyY(double y) {
 		this.y *= y;
+		return this;
+	}
+	
+	public Vec2d divide(Vec2d vec) {
+		this.x /= vec.x;
+		this.y /= vec.y;
 		return this;
 	}
 	
@@ -82,22 +99,26 @@ public class Vec2d implements ICopyable<Vec2d> {
 		return this;
 	}
 	
-	public void set(Vec2d vec) {
+	public Vec2d set(Vec2d vec) {
 		this.x = vec.x;
 		this.y = vec.y;
+		return this;
 	}
 	
-	public void set(double x, double y) {
+	public Vec2d set(double x, double y) {
 		this.x = x;
 		this.y = y;
+		return this;
 	}
 	
-	public void setX(double x) {
+	public Vec2d setX(double x) {
 		this.x = x;
+		return this;
 	}
 	
-	public void setY(double y) {
+	public Vec2d setY(double y) {
 		this.y = y;
+		return this;
 	}
 	
 	public double getX() {
@@ -108,8 +129,8 @@ public class Vec2d implements ICopyable<Vec2d> {
 		return y;
 	}
 	
-	public double getBothMulti() {
-		return x * y;
+	public Vec2d inverse() {
+		return new Vec2d(-x, -y);
 	}
 	
 	public double difference(Vec2d vec) {

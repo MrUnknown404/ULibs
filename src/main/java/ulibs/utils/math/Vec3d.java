@@ -2,6 +2,7 @@ package main.java.ulibs.utils.math;
 
 import main.java.ulibs.utils.ICopyable;
 
+@SuppressWarnings("javadoc")
 public class Vec3d implements ICopyable<Vec3d> {
 	protected double x, y, z;
 	
@@ -35,7 +36,7 @@ public class Vec3d implements ICopyable<Vec3d> {
 		this(vec.getX(), vec.getY(), vec.getZ());
 	}
 	
-	public Vec3d add(Vec3f vec) {
+	public Vec3d add(Vec3d vec) {
 		this.x += vec.x;
 		this.y += vec.y;
 		this.z += vec.z;
@@ -64,6 +65,13 @@ public class Vec3d implements ICopyable<Vec3d> {
 		return this;
 	}
 	
+	public Vec3d multiply(Vec3d vec) {
+		this.x *= vec.x;
+		this.y *= vec.y;
+		this.z *= vec.z;
+		return this;
+	}
+	
 	public Vec3d multiply(double x, double y, double z) {
 		this.x *= x;
 		this.y *= y;
@@ -83,6 +91,13 @@ public class Vec3d implements ICopyable<Vec3d> {
 	
 	public Vec3d multiplyZ(double z) {
 		this.z *= z;
+		return this;
+	}
+	
+	public Vec3d divide(Vec3d vec) {
+		this.x /= vec.x;
+		this.y /= vec.y;
+		this.z /= vec.z;
 		return this;
 	}
 	
@@ -108,28 +123,33 @@ public class Vec3d implements ICopyable<Vec3d> {
 		return this;
 	}
 	
-	public void set(Vec3f vec) {
+	public Vec3d set(Vec3d vec) {
 		this.x = vec.x;
 		this.y = vec.y;
 		this.z = vec.z;
+		return this;
 	}
 	
-	public void set(double x, double y, double z) {
+	public Vec3d set(double x, double y, double z) {
 		this.x = x;
 		this.y = y;
 		this.z = z;
+		return this;
 	}
 	
-	public void setX(double x) {
+	public Vec3d setX(double x) {
 		this.x = x;
+		return this;
 	}
 	
-	public void setY(double y) {
+	public Vec3d setY(double y) {
 		this.y = y;
+		return this;
 	}
 	
-	public void setZ(double z) {
+	public Vec3d setZ(double z) {
 		this.z = z;
+		return this;
 	}
 	
 	public double getX() {
@@ -142,6 +162,10 @@ public class Vec3d implements ICopyable<Vec3d> {
 	
 	public double getZ() {
 		return z;
+	}
+	
+	public Vec3d inverse() {
+		return new Vec3d(-x, -y, -z);
 	}
 	
 	public double difference(Vec3d vec) {

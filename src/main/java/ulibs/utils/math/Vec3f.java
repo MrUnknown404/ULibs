@@ -2,6 +2,7 @@ package main.java.ulibs.utils.math;
 
 import main.java.ulibs.utils.ICopyable;
 
+@SuppressWarnings("javadoc")
 public class Vec3f implements ICopyable<Vec3f> {
 	protected float x, y, z;
 	
@@ -64,6 +65,13 @@ public class Vec3f implements ICopyable<Vec3f> {
 		return this;
 	}
 	
+	public Vec3f multiply(Vec3f vec) {
+		this.x *= vec.x;
+		this.y *= vec.y;
+		this.z *= vec.z;
+		return this;
+	}
+	
 	public Vec3f multiply(float x, float y, float z) {
 		this.x *= x;
 		this.y *= y;
@@ -83,6 +91,13 @@ public class Vec3f implements ICopyable<Vec3f> {
 	
 	public Vec3f multiplyZ(float z) {
 		this.z *= z;
+		return this;
+	}
+	
+	public Vec3f divide(Vec3f vec) {
+		this.x /= vec.x;
+		this.y /= vec.y;
+		this.z /= vec.z;
 		return this;
 	}
 	
@@ -108,28 +123,33 @@ public class Vec3f implements ICopyable<Vec3f> {
 		return this;
 	}
 	
-	public void set(Vec3f vec) {
+	public Vec3f set(Vec3f vec) {
 		this.x = vec.x;
 		this.y = vec.y;
 		this.z = vec.z;
+		return this;
 	}
 	
-	public void set(float x, float y, float z) {
+	public Vec3f set(float x, float y, float z) {
 		this.x = x;
 		this.y = y;
 		this.z = z;
+		return this;
 	}
 	
-	public void setX(float x) {
+	public Vec3f setX(float x) {
 		this.x = x;
+		return this;
 	}
 	
-	public void setY(float y) {
+	public Vec3f setY(float y) {
 		this.y = y;
+		return this;
 	}
 	
-	public void setZ(float z) {
+	public Vec3f setZ(float z) {
 		this.z = z;
+		return this;
 	}
 	
 	public float getX() {
@@ -142,6 +162,10 @@ public class Vec3f implements ICopyable<Vec3f> {
 	
 	public float getZ() {
 		return z;
+	}
+	
+	public Vec3f inverse() {
+		return new Vec3f(-x, -y, -z);
 	}
 	
 	public float difference(Vec3f vec) {
