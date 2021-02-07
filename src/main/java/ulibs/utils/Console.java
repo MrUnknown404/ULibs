@@ -1,5 +1,9 @@
 package main.java.ulibs.utils;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -8,26 +12,111 @@ import main.java.ulibs.Main;
 /** @author -Unknown- */
 public final class Console {
 	
+	private static PrintWriter pr;
+	
 	/** Weather or not to show the thread in the debug information */
 	public static boolean showThread;
 	private static final WarningType[] DISABLED_TYPES = { WarningType.RegisterDebug, WarningType.TextureDebug };
 	
+	/**Sets up a {@link PrintWriter} to save the console output to file.
+	 * Also automatically deletes any logs after
+	 * @param logFolder The folder to write logs to
+	 * @param maxAmountOfLogs The amount of logs to keep
+	 */
+	public static void setupLogFile(File logFolder, int maxAmountOfLogs) {
+		SimpleDateFormat sdf = new SimpleDateFormat("hh-mm-ss-SSS");
+		String curDate = sdf.format(new Date());
+		
+		if (!logFolder.exists()) {
+			logFolder.mkdirs();
+		} else {
+			int curAmount = 0;
+			for (File f : logFolder.listFiles()) {
+				if (f.getName().endsWith(".log") && f.getName().length() == 20) {
+					try {
+						sdf.parse(f.getName().substring(4, f.getName().length() - 4));
+						curAmount++;
+					} catch (ParseException e) {
+						continue;
+					}
+				}
+			}
+			
+			if (curAmount >= maxAmountOfLogs) {
+				while (curAmount >= maxAmountOfLogs) {
+					File oldest = null;
+					for (File f : logFolder.listFiles()) {
+						if (f.getName().endsWith(".log") && f.getName().length() == 20) {
+							try {
+								Date d = sdf.parse(f.getName().substring(4, f.getName().length() - 4));
+								
+								if (oldest != null) {
+									if (d.before(sdf.parse(oldest.getName().substring(4, oldest.getName().length() - 4)))) {
+										oldest = f;
+									}
+								} else {
+									oldest = f;
+								}
+							} catch (ParseException e) {
+								continue;
+							}
+						} else {
+							continue;
+						}
+					}
+					
+					oldest.delete();
+					
+					curAmount = 0;
+					for (File f : logFolder.listFiles()) {
+						if (f.getName().endsWith(".log") && f.getName().length() == 20) {
+							try {
+								sdf.parse(f.getName().substring(4, f.getName().length() - 4));
+								curAmount++;
+							} catch (ParseException e) {
+								continue;
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		File log = new File(logFolder + "\\Log-" + curDate + ".log");
+		
+		try {
+			pr = new PrintWriter(log);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	/** Prints date info to the console Example: <p> [12:34:56:789] [Info] [ExampleClass.exampleMethod.69] [Hour/Minute/Second/Millisecond] */
 	public static void getTimeExample() {
-		System.out.println(
-				"[" + new SimpleDateFormat("hh:mm:ss:SSS").format(new Date()) + "]" + (showThread ? " [T/" + Thread.currentThread().getName() + "] " : " ") + "[" +
-						WarningType.Info + "] [" + getCallerInfo(Console.class) + "] [Hour/Minute/Second/Millisecond]");
+		String msg = "[" + new SimpleDateFormat("hh:mm:ss:SSS").format(new Date()) + "]" + (showThread ? " [T/" + Thread.currentThread().getName() + "] " : " ") +
+				"[" + WarningType.Info + "] [" + getCallerInfo(Console.class) + "] [Hour/Minute/Second/Millisecond]";
+		
+		System.out.println(msg);
+		if (pr != null) {
+			pr.println(msg);
+			pr.flush();
+		}
 	}
 	
 	/** Prints date info plus the given string to the console Example: <p> [12:34:56:789] [Debug] [ExampleClass.exampleMethod.69] : Hello! 
-	 * @param type The type of warning to display. Defaults to {@link WarningType#Debug}
+	 * @param type The type of warning to display. Defaults to {@link WarningType#Debug} if null
 	 * @param string The string to print
 	 * @param shouldThrow Weather or not to throw an exception
 	 */
 	public static void print(WarningType type, String string, boolean shouldThrow) {
 		if (type == null) {
-			System.out.println(
-					"[" + new SimpleDateFormat("hh:mm:ss:SSS").format(new Date()) + "] [Debug] [" + getCallerInfo(Console.class) + "] : " + string);
+			String msg = "[" + new SimpleDateFormat("hh:mm:ss:SSS").format(new Date()) + "] [Debug] [" + getCallerInfo(Console.class) + "] : " + string;
+			
+			System.out.println(msg);
+			if (pr != null) {
+				pr.println(msg);
+				pr.flush();
+			}
 			return;
 		}
 		
@@ -40,13 +129,23 @@ public final class Console {
 		}
 		
 		if (type == WarningType.Error || type == WarningType.FatalError) {
-			System.err.println(
-					"[" + new SimpleDateFormat("hh:mm:ss:SSS").format(new Date()) + "]" + (showThread ? " [T/" + Thread.currentThread().getName() + "] " : " ") +
-							"[" + type.toString() + "] [" + getCallerInfo(Console.class) + "] : " + string);
+			String msg = "[" + new SimpleDateFormat("hh:mm:ss:SSS").format(new Date()) + "]" +
+					(showThread ? " [T/" + Thread.currentThread().getName() + "] " : " ") + "[" + type.toString() + "] [" + getCallerInfo(Console.class) + "] : " +
+					string;
+			System.err.println(msg);
+			if (pr != null) {
+				pr.println(msg);
+				pr.flush();
+			}
 		} else {
-			System.out.println(
-					"[" + new SimpleDateFormat("hh:mm:ss:SSS").format(new Date()) + "]" + (showThread ? " [T/" + Thread.currentThread().getName() + "] " : " ") +
-							"[" + type.toString() + "] [" + getCallerInfo(Console.class) + "] : " + string);
+			String msg = "[" + new SimpleDateFormat("hh:mm:ss:SSS").format(new Date()) + "]" +
+					(showThread ? " [T/" + Thread.currentThread().getName() + "] " : " ") + "[" + type.toString() + "] [" + getCallerInfo(Console.class) + "] : " +
+					string;
+			System.out.println(msg);
+			if (pr != null) {
+				pr.println(msg);
+				pr.flush();
+			}
 		}
 		
 		if (shouldThrow) {
