@@ -1,7 +1,8 @@
 package main.java.ulibs.utils;
 
 import java.io.File;
-import java.io.IOException;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -12,7 +13,7 @@ import main.java.ulibs.Main;
 /** @author -Unknown- */
 public final class Console {
 	
-	private static PrintWriter pr;
+	static PrintWriter prt;
 	
 	/** Weather or not to show the thread in the debug information */
 	public static boolean showThread;
@@ -85,8 +86,16 @@ public final class Console {
 		File log = new File(logFolder + "\\Log-" + curDate + ".log");
 		
 		try {
-			pr = new PrintWriter(log);
-		} catch (IOException e) {
+			FileOutputStream os = new FileOutputStream(log);
+			System.setOut(new ConsolePrintStream(os, System.out));
+			System.setErr(new ConsolePrintStream(os, System.err));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			prt = new PrintWriter(log);
+		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
@@ -97,10 +106,6 @@ public final class Console {
 				"[" + WarningType.Info + "] [" + getCallerInfo(Console.class) + "] [Hour/Minute/Second/Millisecond]";
 		
 		System.out.println(msg);
-		if (pr != null) {
-			pr.println(msg);
-			pr.flush();
-		}
 	}
 	
 	/** Prints date info plus the given string to the console Example: <p> [12:34:56:789] [Debug] [ExampleClass.exampleMethod.69] : Hello! 
@@ -113,10 +118,6 @@ public final class Console {
 			String msg = "[" + new SimpleDateFormat("hh:mm:ss:SSS").format(new Date()) + "] [Debug] [" + getCallerInfo(Console.class) + "] : " + string;
 			
 			System.out.println(msg);
-			if (pr != null) {
-				pr.println(msg);
-				pr.flush();
-			}
 			return;
 		}
 		
@@ -133,19 +134,11 @@ public final class Console {
 					(showThread ? " [T/" + Thread.currentThread().getName() + "] " : " ") + "[" + type.toString() + "] [" + getCallerInfo(Console.class) + "] : " +
 					string;
 			System.err.println(msg);
-			if (pr != null) {
-				pr.println(msg);
-				pr.flush();
-			}
 		} else {
 			String msg = "[" + new SimpleDateFormat("hh:mm:ss:SSS").format(new Date()) + "]" +
 					(showThread ? " [T/" + Thread.currentThread().getName() + "] " : " ") + "[" + type.toString() + "] [" + getCallerInfo(Console.class) + "] : " +
 					string;
 			System.out.println(msg);
-			if (pr != null) {
-				pr.println(msg);
-				pr.flush();
-			}
 		}
 		
 		if (shouldThrow) {
