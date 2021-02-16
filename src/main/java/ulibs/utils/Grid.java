@@ -7,24 +7,33 @@ import main.java.ulibs.utils.Console.WarningType;
 import main.java.ulibs.utils.math.Vec2i;
 
 public class Grid<T> {
-	private final List<T> grid = new ArrayList<T>();
+	private final List<T> grid;
 	private final int width, height;
 	
 	public Grid(T t, int width, int height) {
 		this.width = width;
 		this.height = height;
-		
-		for (int i = 0; i < width * height; i++) {
-			grid.add(t);
-		}
+		this.grid = CollectionUtils.fill(width * height, t);
 	}
 	
 	public Grid(int width, int height) {
 		this(null, width, height);
 	}
 	
+	public Grid(T t, Vec2i vec) {
+		this(t, vec.getX(), vec.getY());
+	}
+	
+	public Grid(Vec2i vec) {
+		this(null, vec.getX(), vec.getY());
+	}
+	
 	public List<T> get() {
 		return grid;
+	}
+	
+	public T get(Vec2i vec) {
+		return get(vec.getX(), vec.getY());
 	}
 	
 	public T get(int x, int y) {
@@ -50,6 +59,10 @@ public class Grid<T> {
 		}
 		
 		return this;
+	}
+	
+	public Grid<T> remove(Vec2i vec) {
+		return remove(vec.getX(), vec.getY());
 	}
 	
 	public Grid<T> remove(int x, int y) {
