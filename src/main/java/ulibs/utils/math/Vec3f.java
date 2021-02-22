@@ -65,6 +65,35 @@ public class Vec3f implements ICopyable<Vec3f> {
 		return this;
 	}
 	
+	public Vec3f subtract(Vec3f vec) {
+		this.x -= vec.x;
+		this.y -= vec.y;
+		this.z -= vec.z;
+		return this;
+	}
+	
+	public Vec3f subtract(float x, float y, float z) {
+		this.x -= x;
+		this.y -= y;
+		this.z -= z;
+		return this;
+	}
+	
+	public Vec3f subtractX(float x) {
+		this.x -= x;
+		return this;
+	}
+	
+	public Vec3f subtractY(float y) {
+		this.y -= y;
+		return this;
+	}
+	
+	public Vec3f subtractZ(float z) {
+		this.z -= z;
+		return this;
+	}
+	
 	public Vec3f multiply(Vec3f vec) {
 		this.x *= vec.x;
 		this.y *= vec.y;

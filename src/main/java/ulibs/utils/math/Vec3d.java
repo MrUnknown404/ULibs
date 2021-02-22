@@ -65,6 +65,35 @@ public class Vec3d implements ICopyable<Vec3d> {
 		return this;
 	}
 	
+	public Vec3d subtract(Vec3d vec) {
+		this.x -= vec.x;
+		this.y -= vec.y;
+		this.z -= vec.z;
+		return this;
+	}
+	
+	public Vec3d subtract(double x, double y, double z) {
+		this.x -= x;
+		this.y -= y;
+		this.z -= z;
+		return this;
+	}
+	
+	public Vec3d subtractX(double x) {
+		this.x -= x;
+		return this;
+	}
+	
+	public Vec3d subtractY(double y) {
+		this.y -= y;
+		return this;
+	}
+	
+	public Vec3d subtractZ(double z) {
+		this.z -= z;
+		return this;
+	}
+	
 	public Vec3d multiply(Vec3d vec) {
 		this.x *= vec.x;
 		this.y *= vec.y;

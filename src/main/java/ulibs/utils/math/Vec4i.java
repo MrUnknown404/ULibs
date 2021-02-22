@@ -75,6 +75,42 @@ public class Vec4i implements ICopyable<Vec4i> {
 		return this;
 	}
 	
+	public Vec4i subtract(Vec4i vec) {
+		this.x -= vec.x;
+		this.y -= vec.y;
+		this.z -= vec.z;
+		this.w -= vec.w;
+		return this;
+	}
+	
+	public Vec4i subtract(int x, int y, int z, int w) {
+		this.x -= x;
+		this.y -= y;
+		this.z -= z;
+		this.w -= w;
+		return this;
+	}
+	
+	public Vec4i subtractX(int x) {
+		this.x -= x;
+		return this;
+	}
+	
+	public Vec4i subtractY(int y) {
+		this.y -= y;
+		return this;
+	}
+	
+	public Vec4i subtractZ(int z) {
+		this.z -= z;
+		return this;
+	}
+	
+	public Vec4i subtractW(int w) {
+		this.w -= w;
+		return this;
+	}
+	
 	public Vec4i multiply(Vec4i vec) {
 		this.x *= vec.x;
 		this.y *= vec.y;

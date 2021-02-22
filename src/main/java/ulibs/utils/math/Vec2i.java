@@ -55,6 +55,28 @@ public class Vec2i implements ICopyable<Vec2i> {
 		return this;
 	}
 	
+	public Vec2i subtract(Vec2i vec) {
+		this.x -= vec.x;
+		this.y -= vec.y;
+		return this;
+	}
+	
+	public Vec2i subtract(int x, int y) {
+		this.x -= x;
+		this.y -= y;
+		return this;
+	}
+	
+	public Vec2i subtractX(int x) {
+		this.x -= x;
+		return this;
+	}
+	
+	public Vec2i subtractY(int y) {
+		this.y -= y;
+		return this;
+	}
+	
 	public Vec2i multiply(Vec2i vec) {
 		this.x *= vec.x;
 		this.y *= vec.y;

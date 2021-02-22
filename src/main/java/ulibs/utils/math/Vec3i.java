@@ -65,6 +65,35 @@ public class Vec3i implements ICopyable<Vec3i> {
 		return this;
 	}
 	
+	public Vec3i subtract(Vec3i vec) {
+		this.x -= vec.x;
+		this.y -= vec.y;
+		this.z -= vec.z;
+		return this;
+	}
+	
+	public Vec3i subtract(int x, int y, int z) {
+		this.x -= x;
+		this.y -= y;
+		this.z -= z;
+		return this;
+	}
+	
+	public Vec3i subtractX(int x) {
+		this.x -= x;
+		return this;
+	}
+	
+	public Vec3i subtractY(int y) {
+		this.y -= y;
+		return this;
+	}
+	
+	public Vec3i subtractZ(int z) {
+		this.z -= z;
+		return this;
+	}
+	
 	public Vec3i multiply(Vec3i vec) {
 		this.x *= vec.x;
 		this.y *= vec.y;

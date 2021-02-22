@@ -55,6 +55,28 @@ public class Vec2d implements ICopyable<Vec2d> {
 		return this;
 	}
 	
+	public Vec2d subtract(Vec2d vec) {
+		this.x -= vec.x;
+		this.y -= vec.y;
+		return this;
+	}
+	
+	public Vec2d subtract(double x, double y) {
+		this.x -= x;
+		this.y -= y;
+		return this;
+	}
+	
+	public Vec2d subtractX(double x) {
+		this.x -= x;
+		return this;
+	}
+	
+	public Vec2d subtractY(double y) {
+		this.y -= y;
+		return this;
+	}
+	
 	public Vec2d multiply(Vec2d vec) {
 		this.x *= vec.x;
 		this.y *= vec.y;
