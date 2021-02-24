@@ -1,5 +1,6 @@
 package main.java.ulibs.utils;
 
+import main.java.ulibs.utils.math.Vec2f;
 import main.java.ulibs.utils.math.Vec2i;
 import main.java.ulibs.utils.math.Vec4f;
 
@@ -53,6 +54,14 @@ public class HitBox {
 		th += ty;
 		
 		return ((rw < x || rw > tx) && (rh < y || rh > ty) && (tw < tx || tw > x) && (th < ty || th > y));
+	}
+	
+	public HitBox addXY(Vec2f vec) {
+		return new HitBox(x + vec.getX(), y + vec.getY(), w, h);
+	}
+	
+	public HitBox addXY(float x, float y) {
+		return new HitBox(this.x + x, this.y + y, w, h);
 	}
 	
 	public HitBox addX(float x) {
