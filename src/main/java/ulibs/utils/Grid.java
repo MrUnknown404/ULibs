@@ -101,7 +101,7 @@ public class Grid<T> {
 			Console.print(WarningType.Error, "'Y' Cannot be lower than 0! (was " + y + ")", true);
 			return false;
 		} else if (y >= height) {
-			Console.print(WarningType.Error, "'Y' Cannot be " + height + " or above! (was " + y + ")");
+			Console.print(WarningType.Error, "'Y' Cannot be " + height + " or above! (was " + y + ")", true);
 			return false;
 		}
 		
