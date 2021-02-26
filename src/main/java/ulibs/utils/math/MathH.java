@@ -61,10 +61,10 @@ public class MathH {
 	
 	public static double normalize(double number, double min, double max) {
 		if (number > max) {
-			Console.print(Console.WarningType.Error, "the specified number is more than the specified max!");
+			Console.print(Console.WarningType.Error, "the specified number is more than the specified max!", true);
 			return max;
 		} else if (number < min) {
-			Console.print(Console.WarningType.Error, "the specified number cannot be less than the specified min!");
+			Console.print(Console.WarningType.Error, "the specified number cannot be less than the specified min!", true);
 			return 0;
 		}
 		
