@@ -19,7 +19,7 @@ public final class Console {
 	
 	/** Weather or not to show the thread in the debug information */
 	public static boolean showThread;
-	private static final WarningType[] DISABLED_TYPES = { WarningType.RegisterDebug, WarningType.TextureDebug };
+	private static final WarningType[] DISABLED_TYPES = { WarningType.RegisterDebug, WarningType.TextureDebug, WarningType.Debug };
 	
 	/**Sets up a {@link PrintWriter} to save the console output to file.
 	 * Also automatically deletes any logs after
@@ -104,8 +104,8 @@ public final class Console {
 	
 	/** Prints date info to the console Example: <p> [12:34:56:789] [Info] [ExampleClass.exampleMethod.69] [Hour/Minute/Second/Millisecond] */
 	public static void getTimeExample() {
-		String msg = "[" + new SimpleDateFormat("hh:mm:ss:SSS").format(new Date()) + "]" + (showThread ? " [T/" + Thread.currentThread().getName() + "] " : " ") +
-				"[" + WarningType.Info + "] [" + getCallerInfo(Console.class) + "] [Hour/Minute/Second/Millisecond]";
+		String msg = "[" + new SimpleDateFormat("hh:mm:ss:SSS").format(new Date()) + "]" + (showThread ? " [T/" + Thread.currentThread().getName() + "] " : " ") + "[" +
+				WarningType.Info + "] [" + getCallerInfo(Console.class) + "] [Hour/Minute/Second/Millisecond]";
 		
 		System.out.println(msg);
 	}
@@ -132,14 +132,12 @@ public final class Console {
 		}
 		
 		if (type == WarningType.Error || type == WarningType.FatalError) {
-			String msg = "[" + new SimpleDateFormat("hh:mm:ss:SSS").format(new Date()) + "]" +
-					(showThread ? " [T/" + Thread.currentThread().getName() + "] " : " ") + "[" + type.toString() + "] [" + getCallerInfo(Console.class) + "] : " +
-					string;
+			String msg = "[" + new SimpleDateFormat("hh:mm:ss:SSS").format(new Date()) + "]" + (showThread ? " [T/" + Thread.currentThread().getName() + "] " : " ") + "[" +
+					type.toString() + "] [" + getCallerInfo(Console.class) + "] : " + string;
 			System.err.println(msg);
 		} else {
-			String msg = "[" + new SimpleDateFormat("hh:mm:ss:SSS").format(new Date()) + "]" +
-					(showThread ? " [T/" + Thread.currentThread().getName() + "] " : " ") + "[" + type.toString() + "] [" + getCallerInfo(Console.class) + "] : " +
-					string;
+			String msg = "[" + new SimpleDateFormat("hh:mm:ss:SSS").format(new Date()) + "]" + (showThread ? " [T/" + Thread.currentThread().getName() + "] " : " ") + "[" +
+					type.toString() + "] [" + getCallerInfo(Console.class) + "] : " + string;
 			System.out.println(msg);
 		}
 		
