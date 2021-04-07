@@ -10,18 +10,22 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import main.java.ulibs.Main;
+import main.java.ulibs.engine.ClientBase;
 
-/** @author -Unknown- */
+/** A way of writing to the debug console with extra information and printing to a log file
+ * <br>
+ * {@link #setupLogFile} should be run before you print anything if you want to have log files
+ * 
+ * @author -Unknown-
+ */
 public final class Console {
+	private static PrintWriter prt;
 	
-	static PrintWriter prt;
-	
-	/** Weather or not to show the thread in the debug information */
+	/** Whether or not to show the thread in the debug information */
 	public static boolean showThread;
 	private static final WarningType[] DISABLED_TYPES = { WarningType.RegisterDebug, WarningType.TextureDebug, WarningType.Debug };
 	
-	/**Sets up a {@link PrintWriter} to save the console output to file.
+	/** Sets up a {@link PrintWriter} to save the console output to file.
 	 * Also automatically deletes any logs after
 	 * @param logFolder The folder to write logs to
 	 * @param maxAmountOfLogs The amount of logs to keep
@@ -113,7 +117,7 @@ public final class Console {
 	/** Prints date info plus the given string to the console Example: <p> [12:34:56:789] [Debug] [ExampleClass.exampleMethod.69] : Hello! 
 	 * @param type The type of warning to display. Defaults to {@link WarningType#Debug} if null
 	 * @param string The string to print
-	 * @param shouldThrow Weather or not to throw an exception
+	 * @param shouldThrow Whether or not to throw an exception
 	 */
 	public static void print(WarningType type, String string, boolean shouldThrow) {
 		if (type == null) {
@@ -123,7 +127,7 @@ public final class Console {
 			return;
 		}
 		
-		if (!Main.isDebug) {
+		if (!ClientBase.isDebug()) {
 			for (WarningType t : DISABLED_TYPES) {
 				if (t == type) {
 					return;

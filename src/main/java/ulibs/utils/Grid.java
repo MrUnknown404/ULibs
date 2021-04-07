@@ -1,6 +1,5 @@
 package main.java.ulibs.utils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import main.java.ulibs.utils.Console.WarningType;
@@ -28,7 +27,7 @@ public class Grid<T> {
 		this(null, vec.getX(), vec.getY());
 	}
 	
-	public List<T> get() {
+	public List<T> getAsList() {
 		return grid;
 	}
 	
@@ -108,22 +107,7 @@ public class Grid<T> {
 		return true;
 	}
 	
-	public List<String> toStringList() {
-		List<String> strs = new ArrayList<String>(grid.size());
-		String str = "";
-		for (int i = 0; i < grid.size(); i++) {
-			str += grid.get(i);
-			if (i % width == width - 1) {
-				strs.add(str);
-				str = "";
-			} else {
-				str += ", ";
-			}
-		}
-		
-		return strs;
-	}
-	
+	/** @return Returns the grid's size */
 	public int size() {
 		return grid.size();
 	}
@@ -132,10 +116,12 @@ public class Grid<T> {
 		return grid.size() == 0;
 	}
 	
+	/** @return Returns the grid's width */
 	public int getWidth() {
 		return width;
 	}
 	
+	/** @return Returns the grid's height */
 	public int getHeight() {
 		return height;
 	}

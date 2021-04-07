@@ -7,7 +7,6 @@ import java.util.Random;
 import main.java.ulibs.utils.Console;
 import main.java.ulibs.utils.Console.WarningType;
 
-/** @author -Unknown- */
 public class UCrypt {
 	
 	/** Encodes the given string using a randomized cipher based around the given seed
