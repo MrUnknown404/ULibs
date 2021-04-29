@@ -31,7 +31,7 @@ public final class Console {
 	 * @param maxAmountOfLogs The amount of logs to keep
 	 */
 	public static void setupLogFile(File logFolder, int maxAmountOfLogs) {
-		SimpleDateFormat sdf = new SimpleDateFormat("hh-mm-ss-SSS");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-hh-mm-ss-SSS");
 		String curDate = sdf.format(new Date());
 		
 		if (!logFolder.exists()) {
