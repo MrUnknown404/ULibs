@@ -62,4 +62,15 @@ public class VertexArray extends QuadData {
 	public void draw() {
 		GL46.glDrawElements(GL46.GL_TRIANGLES, count, GL46.GL_UNSIGNED_INT, 0);
 	}
+	
+	@Override
+	public void reset() {
+		super.reset();
+		wasSetup = false;
+		vao = 0;
+		vbo = 0;
+		ibo = 0;
+		tbo = 0;
+		count = 0;
+	}
 }

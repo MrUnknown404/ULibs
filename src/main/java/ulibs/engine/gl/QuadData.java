@@ -29,6 +29,13 @@ public class QuadData implements ICopyable<QuadData> {
 		this(data.vertices, data.indices, data.tcs, data.size);
 	}
 	
+	public void reset() {
+		vertices = new float[0];
+		tcs = new float[0];
+		indices = new int[0];
+		size = 0;
+	}
+	
 	public <T extends QuadData> T addAll(QuadData data) {
 		return addAll(data.vertices, data.indices, data.tcs);
 	}
